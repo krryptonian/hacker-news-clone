@@ -4,6 +4,6 @@
 
 @layer base {
   body {
-    @apply scroll-smooth bg-neutral-900 text-neutral-100 antialiased;
+    @apply scroll-smooth bg-gray-50 text-gray-950 antialiased;
   }
 }

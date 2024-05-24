@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -20,6 +20,7 @@
     "url-parse": "^1.5.10"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.13",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@vitejs/plugin-react": "^3.1.0",
