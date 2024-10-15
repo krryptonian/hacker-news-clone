@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import moment from 'moment'
 import { Loading } from '../Home/Home'
 
@@ -35,7 +35,7 @@ const User = () => {
         <Loading />
       ) : (
         <>
-          <h1 className='mb-3 text-2xl text-blue-600'>{username}</h1>
+          <h1 className='mb-3 text-2xl text-emerald-500'>{username}</h1>
           <div className='space-x-1'>
             <span>Karma:</span>
             <span>{details.karma}</span>

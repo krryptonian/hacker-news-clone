@@ -41,29 +41,24 @@ const Home = () => {
 
   return (
     <div className='mx-auto mb-4 max-w-3xl'>
-      <InfiniteScroll
-        loader={<Loading />}
-        className='space-y-4'
-        dataLength={stories.length}
-        next={() => fetchItems()}
-        hasMore={true}
-      >
+      <InfiniteScroll loader={<Loading />} className='space-y-4' dataLength={stories.length} next={() => fetchItems()} hasMore={true}>
         {stories.map((story, index) => (
-          <div key={index}>
+          <div key={index} id={story.id} aria-label={story.title}>
             <div className='flex flex-col md:flex-row md:items-center md:justify-between md:gap-3'>
               <a
                 target='_blank'
                 href={story.url}
-                className='text-blue-600 visited:font-medium visited:text-pink-500 hover:text-blue-800'
+                className='text-emerald-500 hover:visited:text-pink-700 active:visited:text-pink-700 focus:visited:text-pink-700 visited:text-pink-500 hover:text-emerald-700'
               >
                 {story.title}
               </a>
-              <span className='text-xs text-neutral-400'>({getHostname(story.url)})</span>
+              <span className='text-xs text-gray-400'>({getHostname(story.url)})</span>
             </div>
-            <div className='flex items-center justify-between text-sm text-gray-500'>
+            <div className='flex items-center justify-between text-sm text-gray-400'>
               <span>
-                {story.score} point by&nbsp;
-                <Link to={`/user/${story.by}`} className='self-end hover:underline'>
+                {`${story.descendants || 0} comments`}&nbsp;&middot;&nbsp;
+                {story.score} point&nbsp;&middot;&nbsp;Posted by&nbsp;
+                <Link to={`/user/${story.by}`} className='self-end hover:underline hover:text-emerald-500'>
                   {story.by}
                 </Link>
                 &nbsp;at&nbsp;{moment.unix(story.time).format('LLL')}
@@ -71,8 +66,8 @@ const Home = () => {
             </div>
 
             {story.text && (
-              <div className='my-4 border-l-4 border-blue-100 pl-4'>
-                <div className='prose max-w-none'>{parse(story.text)}</div>
+              <div className='my-4 border-l-2 border-gray-800 pl-4'>
+                <div className='prose max-w-none invert'>{parse(story.text)}</div>
               </div>
             )}
           </div>
@@ -87,18 +82,9 @@ export default Home
 export const Loading = () => {
   return (
     <div className='flex items-center justify-center gap-3 py-4 text-gray-400'>
-      <svg
-        className='h-5 w-5 animate-spin text-blue-600'
-        xmlns='http://www.w3.org/2000/svg'
-        fill='none'
-        viewBox='0 0 24 24'
-      >
+      <svg className='h-5 w-5 animate-spin text-emerald-500' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'>
         <circle className='opacity-25' cx='12' cy='12' r='10' stroke='currentColor' strokeWidth='4' />
-        <path
-          className='opacity-75'
-          fill='currentColor'
-          d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
-        />
+        <path className='opacity-75' fill='currentColor' d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z' />
       </svg>
       <span className='text-sm'>Loading...</span>
     </div>
